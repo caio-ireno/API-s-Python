@@ -1,0 +1,58 @@
+from flask import Blueprint, request, jsonify
+
+alunos_blueprint = Blueprint('alunos', __name__)
+
+dados = {
+    "alunos": [
+        {"nome": "lucas", "id": 15},
+        {"nome": "cicero", "id": 29},
+    ],
+    "professores": []
+}
+
+class AlunoNaoEncontrado(Exception):
+    pass
+
+def aluno_por_id(id_aluno):
+    lista_alunos = dados['alunos']
+    for dicionario in lista_alunos:
+        if dicionario['id'] == id_aluno:
+            return dicionario
+    raise AlunoNaoEncontrado
+
+@alunos_blueprint.route('/alunos', methods=['GET'])
+def get_alunos():
+    return jsonify(dados['alunos'])
+
+@alunos_blueprint.route('/alunos/<int:id_aluno>', methods=['GET'])
+def get_aluno(id_aluno):
+    try:
+        aluno = aluno_por_id(id_aluno)
+        return jsonify(aluno)
+    except AlunoNaoEncontrado:
+        return jsonify({'message': 'Aluno não encontrado'}), 404
+
+@alunos_blueprint.route('/alunos', methods=['POST'])
+def create_aluno():
+    data = request.json
+    dados['alunos'].append(data)
+    return jsonify(data), 201
+
+@alunos_blueprint.route('/alunos/<int:id_aluno>', methods=['PUT'])
+def update_aluno(id_aluno):
+    data = request.json
+    try:
+        aluno = aluno_por_id(id_aluno)
+        aluno.update(data)
+        return jsonify(aluno)
+    except AlunoNaoEncontrado:
+        return jsonify({'message': 'Aluno não encontrado'}), 404
+
+@alunos_blueprint.route('/alunos/<int:id_aluno>', methods=['DELETE'])
+def delete_aluno(id_aluno):
+    try:
+        aluno = aluno_por_id(id_aluno)
+        dados['alunos'].remove(aluno)
+        return '', 204
+    except AlunoNaoEncontrado:
+        return jsonify({'message': 'Aluno não encontrado'}), 404
