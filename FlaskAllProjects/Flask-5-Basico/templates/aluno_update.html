@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Atualizar Aluno</title>
+</head>
+
+<body>
+  <h1>Atualizar Aluno</h1>
+  <form action="{{ url_for('alunos.update_aluno', id_aluno=aluno.id) }}" method="POST">
+    <!-- Altere o método de envio para PUT -->
+    <input type="hidden" name="_method" value="PUT">
+    <label for="nome">Nome:</label>
+    <input type="text" id="nome" name="nome" value="{{ aluno.nome }}">
+    <button type="submit">Atualizar</button>
+  </form>
+</body>
+
+</html>
