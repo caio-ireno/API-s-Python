@@ -1,10 +1,7 @@
-
 from flask import Flask, request
 import model_aluno_professor as model
 
-
 app = Flask(__name__) 
-
 		
 @app.route("/") 
 def hello():

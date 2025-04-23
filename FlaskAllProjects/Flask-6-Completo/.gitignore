@@ -1,0 +1,21 @@
+# Ambiente virtual
+*/venv/
+venv/
+env/
+env.bak/
+*.env
+
+# Cache do pytest
+.pytest_cache/
+
+# Arquivos de logs
+*.log
+
+# Arquivos de compilação do Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Arquivos temporários do sistema operacional
+.DS_Store        #_

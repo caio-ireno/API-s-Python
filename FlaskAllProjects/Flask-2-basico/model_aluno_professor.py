@@ -2,7 +2,8 @@ dados = {"alunos":[
                    {"nome":"lucas","id":15},
                    {"nome":"cicero","id":29},
                   ], 
-        "professores":[]}
+        "professores":[]
+        }
 
 class AlunoNaoEncontrado(Exception):
     pass #palavra-chave que serve como uma instrução nula, ou seja, não faz nada

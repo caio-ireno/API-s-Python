@@ -46,7 +46,6 @@ Testes 100 a 109: Teremos as URLs análogas para professores.
 
 class TestStringMethods(unittest.TestCase):
 
-
     def test_000_alunos_retorna_lista(self):
         #pega a url /alunos, com o verbo get
         r = requests.get('http://localhost:5002/alunos')
@@ -143,6 +142,7 @@ class TestStringMethods(unittest.TestCase):
     >>> lista.remove(10)
     >>> lista
     [20]'''
+    
     def test_004_deleta(self):
         #apago tudo
         r_reset = requests.post('http://localhost:5002/reseta')
@@ -419,23 +419,6 @@ class TestStringMethods(unittest.TestCase):
         self.assertEqual(len(r_lista.json()),2)
         r_lista_alunos = requests.get('http://localhost:5002/alunos')
         self.assertEqual(len(r_lista_alunos.json()),0)
-
-
-
-
-        
-
-
-        
-
-
-
-
-
-    
-
-    
-
 
 def runTests():
         suite = unittest.defaultTestLoader.loadTestsFromTestCase(TestStringMethods)
