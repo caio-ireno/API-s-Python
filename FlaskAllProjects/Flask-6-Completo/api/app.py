@@ -16,16 +16,7 @@ configure_swagger(app)
 with app.app_context():
     db.create_all()
 
-def run_tests():
-    os.environ['FLASK_ENV'] = 'testing'
-    # Executa os testes e captura o resultado
-    result = pytest.main(['--maxfail=1', '--disable-warnings', '--tb=short'])
-    return result
 
-if __name__ == '__main__':
-    result = run_tests()
-    
-    if result != 0:  # Se algum teste falhar, não inicie o servidor
-        sys.exit("Testes falharam. A aplicação não será iniciada.")
-    
+
+if __name__ == '__main__':  
     app.run(host=app.config["HOST"], port=app.config['PORT'], debug=app.config['DEBUG'])
